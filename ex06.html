@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descubra seu IMC</title>
+
+    <style>
+        body{
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            background-color: #222;
+        }
+
+        #calculadora{
+            background-color: yellow;
+            color: black;
+            width: 20%;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 10% auto;
+        }
+
+        input{
+            width: 100%;
+            height: 30px;
+        }
+
+        button{
+            width: 100%;
+            height: 50px;
+            cursor: pointer;
+            background-color: black;
+            color: yellow;
+            font-weight: 900;
+            border-radius: 10px;
+        }
+
+        #saida{
+            width: 100%;
+            height: 70px;
+            background-color: black;
+            margin: 15px auto;
+            border-radius: 15px;
+            color: yellow;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="calculadora">
+        <h1>Calculadora - IMC</h1>
+        <hr>
+        Nome: <input type="text" id="campo_Nome" placeholder="Nome">
+        <br><br>
+        Altura: <input type="number" id="campo_Altura" placeholder="Altura">
+        <br><br>
+        Peso: <input type="number" id="campo_Peso" placeholder="Peso">
+        <br><br>
+        <button onclick="calcular()">Calcular</button>
+        <br>
+
+        <div id="saida">
+
+        </div>
+    </div>
+
+    <script>
+        function calcular(){
+            var nome = document.getElementById('campo_Nome').value;
+            var altura = document.getElementById('campo_Altura').value;
+            var peso = document.getElementById('campo_Peso').value;
+            var resultado = document.getElementById('saida');
+
+            if (nome !== '' && altura !== '' && peso !== '') {
+
+                var imc = (peso / (altura * altura)).toFixed(1);
+
+                var classificacao;
+
+                if (imc < 18.5) {
+                    classificacao = ' Você está abaixo do peso'
+                } else if (imc >= 18.5 && imc < 24.9) {
+                    classificacao = ' Seu peso está ideal'
+                } else if (imc >= 25 && imc < 29.9) {
+                    classificacao = ' Você está com sobrepeso'
+                } else if(imc >= 30 && imc < 39.9) {
+                    classificacao = ' Você está com obesidade'
+                } else if (imc > 40) {
+                    classificacao = ' Você está com obesidade severa'
+                }
+
+                resultado.innerHTML = `${nome} seu IMC é de ${imc} ${classificacao}`
+            } else {
+                alert('Preencha os campos!')
+            }
+        }
+    </script>
+</body>
+</html>
